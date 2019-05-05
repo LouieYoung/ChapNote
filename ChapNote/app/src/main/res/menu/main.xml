@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/search"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <item android:id="@+id/item_search"
         android:title="搜索"
-        android:showAsAction="never"
-        android:orderInCategory="100"/>
+        android:icon="@mipmap/ic_search"
+        app:showAsAction="ifRoom"/>
 </menu>
