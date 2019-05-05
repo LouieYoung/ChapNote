@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +27,13 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle("小书笔记"); //设置标题
         toolbar.setLogo(R.mipmap.ic_launcher_round); //设置Logo
         setSupportActionBar(toolbar); //这里注意为固定写法
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                // do something...
+                return true;
+            }
+        });
 
     }
     @Override
