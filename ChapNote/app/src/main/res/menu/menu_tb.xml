@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <item android:id="@+id/search"
+        android:title="搜索"
+        android:icon="@drawable/search"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/black"
+        android:title="黑色"
+        android:icon="@mipmap/ic_black"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/red"
+        android:title="红色"
+        android:icon="@mipmap/ic_red"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/yellow"
+        android:title="黄色"
+        android:icon="@mipmap/ic_yellow"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/purple"
+        android:title="红色"
+        android:icon="@mipmap/ic_purple"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/color"
+        android:title="绿色"
+        android:icon="@mipmap/ic_green"
+        app:showAsAction="never"/>
+</menu>
