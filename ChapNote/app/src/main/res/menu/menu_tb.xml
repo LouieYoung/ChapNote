@@ -27,7 +27,7 @@
         android:icon="@drawable/purple"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/color"
+        android:id="@+id/green"
         android:title="绿色"
         android:icon="@drawable/green"
         app:showAsAction="never"/>

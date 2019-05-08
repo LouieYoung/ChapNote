@@ -1,11 +1,12 @@
 package com.example.chapnote;
 
-import android.graphics.Typeface;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.lang.reflect.Method;
 
@@ -27,12 +28,33 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolBar);
 
         toolbar.setTitle("小书笔记"); //设置标题
-        toolbar.setLogo(R.mipmap.ic_launcher_round); //设置Logo
+//        toolbar.setLogo(R.mipmap.ic_launcher_round); //设置Logo
         setSupportActionBar(toolbar); //这里注意为固定写法
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                // do something...
+                switch (item.getItemId()) //得到被点击的item的itemId
+                {
+
+                    case R.id.search:
+                        Toast.makeText(MainActivity.this, "搜索",Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.black:  //对应的ID就是在add方法中所设定的Id
+                        Toast.makeText(MainActivity.this, "全部",Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.red:  //对应的ID就是在add方法中所设定的Id
+                        Toast.makeText(MainActivity.this, "红色",Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.yellow:  //对应的ID就是在add方法中所设定的Id
+                        Toast.makeText(MainActivity.this, "黄色",Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.purple:  //对应的ID就是在add方法中所设定的Id
+                        Toast.makeText(MainActivity.this, "紫色",Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.green:  //对应的ID就是在add方法中所设定的Id
+                        Toast.makeText(MainActivity.this, "绿色",Toast.LENGTH_SHORT).show();
+                        break;
+                }
                 return true;
             }
         });
@@ -43,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_tb,menu);
         return true;
     }
+
 
 
     @Override
@@ -60,4 +83,9 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onMenuOpened(featureId, menu);
     }
+
+
+
+
+
 }
