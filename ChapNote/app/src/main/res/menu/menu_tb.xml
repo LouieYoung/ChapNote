@@ -2,33 +2,37 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-    <item android:id="@+id/search"
-        android:title="搜索"
+    <item
+        android:id="@+id/search"
         android:icon="@drawable/search"
-        app:showAsAction="ifRoom"/>
-    <item
-        android:id="@+id/black"
-        android:title="全部"
-        android:icon="@drawable/black"
-        app:showAsAction="never"/>
-    <item
-        android:id="@+id/red"
-        android:title="红色"
-        android:icon="@drawable/red"
-        app:showAsAction="never"/>
-    <item
-        android:id="@+id/yellow"
-        android:title="黄色"
-        android:icon="@drawable/yellow"
-        app:showAsAction="never"/>
-    <item
-        android:id="@+id/purple"
-        android:title="紫色"
-        android:icon="@drawable/purple"
-        app:showAsAction="never"/>
-    <item
-        android:id="@+id/green"
-        android:title="绿色"
-        android:icon="@drawable/green"
-        app:showAsAction="never"/>
+        android:title="搜索"
+        app:showAsAction="ifRoom" />
+    <group>
+        <item
+            android:id="@+id/black"
+            android:title="全部"
+            android:icon="@drawable/black"
+            app:showAsAction="never"/>
+        <item
+            android:id="@+id/red"
+            android:title="红色"
+            android:icon="@drawable/red"
+            app:showAsAction="never"/>
+        <item
+            android:id="@+id/yellow"
+            android:title="黄色"
+            android:icon="@drawable/yellow"
+            app:showAsAction="never"/>
+        <item
+            android:id="@+id/purple"
+            android:title="紫色"
+            android:icon="@drawable/purple"
+            app:showAsAction="never"/>
+        <item
+            android:id="@+id/green"
+            android:title="绿色"
+            android:icon="@drawable/green"
+            app:showAsAction="never"/>
+    </group>
+
 </menu>

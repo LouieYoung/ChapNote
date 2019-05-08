@@ -1,8 +1,13 @@
 package com.example.chapnote;
 
+import android.graphics.drawable.Drawable;
+
 import java.lang.reflect.Field;
 
 public class Color extends Func {
+    public static String color;
+    public static Drawable colorPic;
+    public static int colorId;
     public static int getColorId(String variableName) {
         int color = getId(variableName,R.color.class);
         return color;
@@ -20,4 +25,5 @@ public class Color extends Func {
             return -1;
         }
     }
+
 }
