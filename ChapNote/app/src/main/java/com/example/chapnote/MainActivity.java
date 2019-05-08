@@ -2,6 +2,7 @@ package com.example.chapnote;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
@@ -36,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) //得到被点击的item的itemId
                 {
                     case R.id.search:
-                        Toast.makeText(MainActivity.this, "搜索",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.black:
                         changeColor("black");
