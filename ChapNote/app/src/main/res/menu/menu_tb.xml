@@ -23,7 +23,7 @@
         app:showAsAction="never"/>
     <item
         android:id="@+id/purple"
-        android:title="红色"
+        android:title="紫色"
         android:icon="@drawable/purple"
         app:showAsAction="never"/>
     <item

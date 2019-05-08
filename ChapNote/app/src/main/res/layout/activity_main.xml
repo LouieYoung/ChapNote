@@ -8,9 +8,10 @@
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/back"
+        android:background="@drawable/background_tb"
         app:popupTheme="@style/ToolbarPopupTheme"
         android:id="@+id/toolBar"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
