@@ -6,13 +6,13 @@
         <item name="colorPrimary">@color/back</item>
         <item name="colorPrimaryDark">@color/black</item>
         <item name="colorAccent">@color/red</item>
-        <item name="android:textColorPrimary">@color/trueblack</item>
-        <item name="android:textColorSecondary">@color/trueblack</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textColorSecondary">@color/black</item>
         <item name="android:fontFamily">@font/hybw</item>
 
     </style>
     <style name="ToolbarPopupTheme" parent="@style/ThemeOverlay.AppCompat.Dark">
-        <item name="android:textColor">@color/trueblack</item>
+        <item name="android:textColor">@color/black</item>
         <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item> <!--新增一个item，用于控制menu-->
     </style>
     <!--<style name="OverflowMenuStyle" parent="Widget.AppCompat.Light.PopupMenu.Overflow">-->
