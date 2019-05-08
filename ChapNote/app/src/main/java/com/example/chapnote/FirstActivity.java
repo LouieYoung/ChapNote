@@ -1,4 +1,6 @@
 package com.example.chapnote;
 
-public class FirstActivity {
+import android.support.v7.app.AppCompatActivity;
+
+public class FirstActivity extends AppCompatActivity {
 }
