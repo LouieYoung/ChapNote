@@ -2,6 +2,7 @@ package com.example.chapnote;
 
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -20,14 +21,16 @@ public class SearchActivity extends AppCompatActivity {
         toolbar.setTitleMarginStart(72);
         changeColor("black");//设置颜色
         setSupportActionBar(toolbar); //这里注意为固定写法
+        toolbar.setNavigationIcon(R.drawable.ic_chevron_left);//设置导航按钮
+        //获取ActionBar
+        ActionBar bar=getSupportActionBar();
+        //允许返回指定的父Activity
+        bar.setDisplayHomeAsUpEnabled(true);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) //得到被点击的item的itemId
                 {
-                    case R.id.search:
-                        Toast.makeText(SearchActivity.this, "搜索",Toast.LENGTH_SHORT).show();
-                        break;
                     case R.id.black:
                         changeColor("black");
                         Toast.makeText(SearchActivity.this, "全部",Toast.LENGTH_SHORT).show();
