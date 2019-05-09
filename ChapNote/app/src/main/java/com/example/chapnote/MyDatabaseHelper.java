@@ -1,6 +1,7 @@
 package com.example.chapnote;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
@@ -31,5 +32,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db,int oldVersion,int newVersion){
         db.execSQL("drop table if exists student");
         onCreate(db);
+    }
+
+    public long allCaseNum(SQLiteDatabase db){
+        String sql = "select count(*) from note";
+        Cursor cursor = db.rawQuery(sql, null);
+        cursor.moveToFirst();
+        long count = cursor.getLong(0);
+        cursor.close();
+        return count;
     }
 }

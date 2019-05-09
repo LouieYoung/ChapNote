@@ -25,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+
+
         final Toolbar toolbar=(Toolbar)findViewById(R.id.toolBar);
         //toolbar部分
         toolbar.setTitle("小书笔记"); //设置标题

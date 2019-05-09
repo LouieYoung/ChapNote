@@ -17,9 +17,10 @@
         </activity>
         <activity android:name=".SearchActivity"
             android:parentActivityName=".MainActivity"/>
-        <activity android:name=".FirstActivity"/>
-        <activity android:name=".ShareActivity"/>
-
-    </application>
+        <activity android:name=".FirstActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".ShareActivity"
+            android:parentActivityName=".FirstActivity"/>
+        </application>
 
 </manifest>

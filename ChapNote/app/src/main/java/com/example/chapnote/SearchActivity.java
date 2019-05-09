@@ -20,7 +20,6 @@ public class SearchActivity extends AppCompatActivity {
         toolbar.setTitle("搜索"); //设置标题
         changeColor("black");//设置颜色
         setSupportActionBar(toolbar); //这里注意为固定写法
-        toolbar.setNavigationIcon(R.drawable.ic_chevron_left);//设置导航按钮
         //获取ActionBar
         ActionBar bar=getSupportActionBar();
         //允许返回指定的父Activity
