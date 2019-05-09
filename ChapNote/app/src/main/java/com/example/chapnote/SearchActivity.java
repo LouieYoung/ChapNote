@@ -17,8 +17,7 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         final Toolbar toolbar=(Toolbar)findViewById(R.id.toolBar);
         //toolbar部分
-        toolbar.setTitle("搜索界面"); //设置标题
-        toolbar.setTitleMarginStart(72);
+        toolbar.setTitle("搜索"); //设置标题
         changeColor("black");//设置颜色
         setSupportActionBar(toolbar); //这里注意为固定写法
         toolbar.setNavigationIcon(R.drawable.ic_chevron_left);//设置导航按钮
@@ -83,9 +82,7 @@ public class SearchActivity extends AppCompatActivity {
         Color.colorPic = ContextCompat.getDrawable(SearchActivity.this,Color.getColorPicId(Color.color));
         Color.colorId = ContextCompat.getColor(SearchActivity.this,Color.getColorId(Color.color));
         final Toolbar toolbar=(Toolbar)findViewById(R.id.toolBar);
-        toolbar.setTitleMarginStart(72);
         toolbar.setTitleTextColor(Color.colorId);
         toolbar.setOverflowIcon(Color.colorPic);
-        toolbar.setLogo(Color.colorPic);
     }
 }
