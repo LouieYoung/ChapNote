@@ -60,7 +60,7 @@ public class SearchActivity extends AppCompatActivity {
     //Menu部分
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_tb,menu);
+        getMenuInflater().inflate(R.menu.menu_tb_search,menu);
         return true;
     }
     @Override
