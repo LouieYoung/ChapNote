@@ -14,8 +14,6 @@ import android.widget.Toast;
 
 import java.lang.reflect.Method;
 
-import static com.example.chapnote.MyApplication.getContext;
-
 
 public class MainActivity extends AppCompatActivity {
 

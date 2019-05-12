@@ -11,7 +11,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -51,15 +50,12 @@ private String mcolor;
                     }
                     idText.setText(sid);
                     sid="";
-//                    Log.i("test::::::::::::","hahaahah");
                 }else{
                     idText.setText(sid);
                 }
-//                Log.i("sdasdaadsdasdsaddas:::","asdsaasddasd"+sid);
             }
         }
     };
-
 
     protected void onCreate(Bundle savedInstanceState) {
         JiebaSegmenter.init(getApplicationContext());
@@ -72,7 +68,7 @@ private String mcolor;
         final Toolbar toolbar=(Toolbar)findViewById(R.id.toolBar);
         //toolbar部分
         toolbar.setTitle("搜索"); //设置标题
-        changeColor("black");//设置颜色
+        changeColor(Color.color);//设置颜色
         setSupportActionBar(toolbar); //这里注意为固定写法
         //获取ActionBar
         ActionBar bar=getSupportActionBar();
@@ -108,13 +104,10 @@ private String mcolor;
             }
         });
 
-
-
         search = findViewById(R.id.search);
         editText = findViewById(R.id.editText);
         idText = findViewById(R.id.idText);
         resultText = findViewById(R.id.resultText);
-
 
         timer=new Timer();
         timer.schedule(new TimerTask() {
@@ -126,8 +119,6 @@ private String mcolor;
                 mHandler.sendMessage(message);
             }
         },0,1000);//每隔一秒使用handler发送一下消息,也就是每隔一秒执行一次,一直重复执行
-
-
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -208,8 +199,6 @@ private String mcolor;
         return arrayList;
     }
 
-
-
     public ArrayList forSame(ArrayList a,ArrayList b){
         ArrayList arrayList3 = new ArrayList();
         for(int j=0;j<a.size();++j){
@@ -219,6 +208,7 @@ private String mcolor;
         }
         return arrayList3;
     }
+
     //Menu部分
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
