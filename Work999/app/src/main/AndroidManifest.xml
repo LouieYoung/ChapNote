@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.chapnote">
+    package="com.example.lenovo.work999">
 
     <application
         android:allowBackup="true"
@@ -12,21 +12,16 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <provider
             android:name=".MyCP"
-            android:authorities="com.example.chapnote"
+            android:authorities="com.example.lenovo.work999"
             android:enabled="true"
-            android:exported="true">
-        </provider>
-        <activity android:name=".SearchActivity"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".FirstActivity"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".ShareActivity"
-            android:parentActivityName=".FirstActivity"/>
-        </application>
+            android:exported="true"></provider>
+    </application>
 
 </manifest>
