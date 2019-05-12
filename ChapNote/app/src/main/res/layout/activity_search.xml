@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+        tools:context=".ShareActivity">
+
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,9 +16,29 @@
         app:navigationIcon="@drawable/ic_left"
         app:popupTheme="@style/ToolbarPopupTheme"
         android:id="@+id/toolBar"/>
-    <TextView
+
+    <EditText
+        android:id="@+id/editText"
+        android:inputType="text"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="搜索"
-        android:textSize="16sp"/>
+        android:layout_height="60dp"
+        android:text=""/>
+
+    <Button
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="84dp"
+        android:text="搜索" />
+    <TextView
+        android:id="@+id/idText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="id" />
+
+    <TextView
+        android:id="@+id/resultText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="分词结果"/>
 </LinearLayout>

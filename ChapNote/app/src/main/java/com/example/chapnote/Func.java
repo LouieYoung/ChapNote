@@ -1,6 +1,8 @@
 package com.example.chapnote;
 
-public class Func {
+import android.support.v7.app.AppCompatActivity;
+
+public class Func extends AppCompatActivity {
 
     public void add(){
         System.out.println("1");

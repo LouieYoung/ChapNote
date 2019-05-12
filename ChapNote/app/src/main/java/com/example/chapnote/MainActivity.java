@@ -1,21 +1,20 @@
 package com.example.chapnote;
 
 
-import android.content.Context;
+import android.content.ContentValues;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+
+import static com.example.chapnote.MyApplication.getContext;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -24,10 +23,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
-
 
         final Toolbar toolbar=(Toolbar)findViewById(R.id.toolBar);
         //toolbar部分
@@ -78,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_tb,menu);
         return true;
     }
+
     @Override
     public boolean onMenuOpened(int featureId, Menu menu) {
         if (menu != null) {
@@ -103,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setOverflowIcon(Color.colorPic);
         toolbar.setLogo(Color.colorPic);
     }
+
+
 
 
 }
