@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:layout_height="30dp">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="18dp">
+    <Button
+        android:id="@+id/color"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:stateListAnimator="@null"
+        android:background="@drawable/black"/>
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="180dp"
+        android:layout_height="18dp"
+        android:textSize="16sp"
+        android:fontFamily="@font/hybw"
+        android:text="text" />
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="70dp"
+        android:layout_height="18dp"
+        android:textSize="15sp"
+        android:fontFamily="@font/lovato"
+        android:text="time" />
+    <Button
+        android:id="@+id/delete"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:background="@drawable/button_enable"
+        android:text="删"/>
+
+    <Button
+        android:id="@+id/up"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:background="@drawable/button_enable"
+        android:text="上"/>
+    </LinearLayout>
+</LinearLayout>

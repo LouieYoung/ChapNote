@@ -8,28 +8,25 @@ import android.widget.Toast;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
     private final String CREATE_NOTE="create table note("+
-            "id integer primary key,"+
+            "id integer primary key autoincrement," +
             "firstid integer,"+
             "seconid integer,"+
             "thirdid integer,"+
             "text text,"+
             "color text,"+
             "time text,"+
-            "open integer"+
+            "open text"+
             ")";
-    private Context mContext;
-    public MyDatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version){
-        super(context,name,factory,version);
-        mContext=context;
+    public MyDatabaseHelper(Context context){
+        super(context,"mydate",null,1);
     }
     @Override
     public void onCreate(SQLiteDatabase db){
         db.execSQL(CREATE_NOTE);
-        Toast.makeText(mContext,"数据已保存", Toast.LENGTH_SHORT).show();
     }
     @Override
     public void onUpgrade(SQLiteDatabase db,int oldVersion,int newVersion){
-        db.execSQL("drop table if exists student");
+        db.execSQL("drop table if exists note");
         onCreate(db);
     }
 
@@ -41,4 +38,5 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return count;
     }
+
 }

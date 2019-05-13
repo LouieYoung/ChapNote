@@ -10,7 +10,7 @@
             <solid android:color="@color/back" />
             <!-- Shape的描边，下面指定了描边的宽度和描边的颜色 -->
             <stroke
-                android:width="2dp"
+                android:width="1dp"
                 android:color="#000000" />
         </shape>
     </item>

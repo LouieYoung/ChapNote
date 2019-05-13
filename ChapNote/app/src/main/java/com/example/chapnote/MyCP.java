@@ -64,11 +64,14 @@ public class MyCP extends ContentProvider {
         return 0;
     }
     public class MyDatabaseHelper extends SQLiteOpenHelper {
-        public static final String CREATE_BOOK="create table Book(id integer primary key autoincrement," +
+        public static final String CREATE_BOOK="create table Book(" +
+                "id integer primary key autoincrement," +
                 "firstid integer," +
                 "seconid integer," +
                 "thirdid integer," +
-                "text text," +
+                "text text,"+
+                "color text,"+
+                "time text,"+
                 "open text)";
         private Context mContext;
         public MyDatabaseHelper(Context context, String name,
@@ -81,7 +84,6 @@ public class MyCP extends ContentProvider {
             db.execSQL(CREATE_BOOK);
             Toast.makeText(mContext,"数据已保存",Toast.LENGTH_LONG).show();
         }
-
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         }
