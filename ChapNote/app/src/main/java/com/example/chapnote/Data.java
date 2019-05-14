@@ -23,6 +23,8 @@ public class Data{
     public void setFirstid(int firstid){
         this.firstid=firstid;
     }
+    public void setSecondid(int secondid){this.secondid=secondid;}
+    public void setThirdid(int thirdid){this.thirdid=thirdid;}
     public int getId(){
         return id;
     }

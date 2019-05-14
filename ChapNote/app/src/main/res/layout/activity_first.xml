@@ -13,55 +13,39 @@
         app:popupTheme="@style/ToolbarPopupTheme"
         android:id="@+id/toolBar"/>
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/button1"
-            android:background="@drawable/button_enable"
-            android:layout_marginLeft="20dp"
-            android:layout_gravity="center"
-            android:layout_width="72dp"
-            android:layout_height="48dp"
-            android:text="展示" />
-        <Button
-            android:id="@+id/button3"
-            android:background="@drawable/button_enable"
-            android:layout_marginLeft="20dp"
-            android:layout_gravity="center"
-            android:layout_width="72dp"
-            android:layout_height="48dp"
-            android:text="新建" />
-        <Button
-            android:id="@+id/button2"
-            android:background="@drawable/button_enable"
-            android:layout_marginLeft="20dp"
-            android:layout_gravity="center"
-            android:layout_width="72dp"
-            android:layout_height="48dp"
-            android:text="显示" />
-
-    </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="139dp"
-            android:text="TextView" />
-
         <ListView
             android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:gravity="right"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/editText"
+            android:inputType="text"
+            android:layout_width="260dp"
+            android:layout_height="54dp"
+            android:layout_marginLeft="20dp"
+            android:theme="@style/MyEditText"
+            android:text=""/>
+        <Button
+            android:id="@+id/button"
+            android:background="@drawable/button_enable"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center"
+            android:layout_width="72dp"
+            android:layout_height="48dp"
+            android:text="新建" />
 
+    </LinearLayout>
 </LinearLayout>

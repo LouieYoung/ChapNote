@@ -34,14 +34,66 @@ public class MyDatabase {
             String open = cursor.getString(cursor.getColumnIndex("open"));
             Data data = new Data(id,firstid,secondid,thirdid,text,color,time,open);
             db.close();
+
             arr.add(data);
+            cursor.moveToNext();
+        };
+        db.close();
+        Collections.sort(arr,new DataComparator());//按firstid、secondid、thirdid依次排序
+        return arr;
+    }
+    public ArrayList<Data> getFirst(){
+        ArrayList<Data> arr = new ArrayList<Data>();
+        dbHelper =new MyDatabaseHelper(context);
+        db= dbHelper.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select id,firstid,secondid,thirdid,text,color,time,open from note",null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            int id = cursor.getInt(cursor.getColumnIndex("id"));
+            int firstid = cursor.getInt(cursor.getColumnIndex("firstid"));
+            int secondid = cursor.getInt(cursor.getColumnIndex("secondid"));
+            int thirdid = cursor.getInt(cursor.getColumnIndex("thirdid"));
+            String text = cursor.getString(cursor.getColumnIndex("text"));
+            String color = cursor.getString(cursor.getColumnIndex("color"));
+            String time = cursor.getString(cursor.getColumnIndex("time"));
+            String open = cursor.getString(cursor.getColumnIndex("open"));
+            Data data = new Data(id,firstid,secondid,thirdid,text,color,time,open);
+            db.close();
+            if(firstid!=0&&secondid==0&&thirdid==0){
+                arr.add(data);
+            }
             cursor.moveToNext();
         };
         db.close();
         Collections.sort(arr,new DataComparator());
         return arr;
     }
-
+    public ArrayList<Data> getMore(int first){
+        ArrayList<Data> arr = new ArrayList<Data>();
+        dbHelper =new MyDatabaseHelper(context);
+        db= dbHelper.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select id,firstid,secondid,thirdid,text,color,time,open from note",null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            int id = cursor.getInt(cursor.getColumnIndex("id"));
+            int firstid = cursor.getInt(cursor.getColumnIndex("firstid"));
+            int secondid = cursor.getInt(cursor.getColumnIndex("secondid"));
+            int thirdid = cursor.getInt(cursor.getColumnIndex("thirdid"));
+            String text = cursor.getString(cursor.getColumnIndex("text"));
+            String color = cursor.getString(cursor.getColumnIndex("color"));
+            String time = cursor.getString(cursor.getColumnIndex("time"));
+            String open = cursor.getString(cursor.getColumnIndex("open"));
+            Data data = new Data(id,firstid,secondid,thirdid,text,color,time,open);
+            db.close();
+            if(firstid==first){
+                arr.add(data);
+            }
+            cursor.moveToNext();
+        };
+        db.close();
+        Collections.sort(arr,new DataComparator());
+        return arr;
+    }
     public void toUpdate(Data data){
         db = dbHelper.getWritableDatabase();
         db.execSQL(

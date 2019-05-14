@@ -13,13 +13,15 @@ import java.util.ArrayList;
 
 import static com.example.chapnote.Color.getColorPicId;
 
-public class MyAdapter extends BaseAdapter {
+public class MyAdapterFirst extends BaseAdapter {
     Context mContext;
     LayoutInflater inflater;
     ArrayList<Data> array;
     MyDatabase myDatabase;
+    int first;
 
-    public MyAdapter(Context context,LayoutInflater inf,ArrayList<Data> arry){
+    public MyAdapterFirst(Context context, LayoutInflater inf, ArrayList<Data> arry,int fir){
+        this.first=fir;
         this.mContext=context;
         this.inflater=inf;
         this.array=arry;
@@ -58,13 +60,13 @@ public class MyAdapter extends BaseAdapter {
         vh.up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toUp(array.get(position).getId());
+                toUp(array.get(position).getId(),array.get(position).getFirstid(),array.get(position).getSecondid());
                 array.clear();
-                array=myDatabase.getFirst();
+                array=myDatabase.getMore(first);
                 notifyDataSetChanged();
             }
         });
-        vh.color.setBackgroundResource(getColorPicId(array.get(position).getColor()));
+       // vh.color.setBackgroundResource(getColorPicId(array.get(first).getColor()));
 
         return convertView;
     }
@@ -72,15 +74,16 @@ public class MyAdapter extends BaseAdapter {
         TextView text,time;
         Button color,up;
     }
-
     public void toUp(int id){
         ArrayList<Data> arr=new ArrayList<Data>();
         myDatabase=new MyDatabase(mContext);
         arr=myDatabase.getarray();
         for(int i=0;i<arr.size();i++){
             if(arr.get(i).getId()==id){
-                if(arr.get(i).getFirstid()!=0){
-                    toUp(arr.get(i).getId(),arr.get(i).getFirstid());
+                if(arr.get(i).getThirdid()!=0){
+                    toUp(arr.get(i).getId(),arr.get(i).getFirstid(),arr.get(i).getSecondid(),arr.get(i).getThirdid());
+                }else if(arr.get(i).getSecondid()!=0){
+                    toUp(arr.get(i).getId(),arr.get(i).getFirstid(),arr.get(i).getSecondid());
                 }else{
                     return;
                 }
@@ -88,23 +91,49 @@ public class MyAdapter extends BaseAdapter {
         }
         return;
     }
-    public void toUp(int id,int firstid){
-        int maxsmallerfirstid=firstid-1;
-        if(maxsmallerfirstid!=0){
+
+    public void toUp(int id,int firstid, int secondid){
+        int maxsmallersecondid=secondid-1;
+        if(maxsmallersecondid!=0){
             ArrayList<Data> arr=new ArrayList<Data>();
+            myDatabase=new MyDatabase(mContext);
             arr=myDatabase.getarray();
             for(int i=0;i<arr.size();i++){
-                if(arr.get(i).getFirstid()==maxsmallerfirstid){
-                    arr.get(i).setFirstid(firstid);
-                    myDatabase.toUpdate(arr.get(i));
-                }else if(arr.get(i).getFirstid()==firstid){
-                    arr.get(i).setFirstid(maxsmallerfirstid);
-                    myDatabase.toUpdate(arr.get(i));
+                if(arr.get(i).getFirstid()==firstid){
+                    if(arr.get(i).getSecondid()==maxsmallersecondid){
+                        Toast.makeText(mContext,"替换"+maxsmallersecondid,Toast.LENGTH_SHORT).show();
+                        arr.get(i).setSecondid(secondid);
+                        myDatabase.toUpdate(arr.get(i));
+                    }else if(arr.get(i).getSecondid()==secondid){
+                        arr.get(i).setSecondid(maxsmallersecondid);
+                        myDatabase.toUpdate(arr.get(i));
+                    }
                 }
             }
         }else {
             return;
         }
-    }
 
+    }
+    public void toUp(int id,int firstid, int secondid,int thirdid){
+        int maxsmallerthirdid=thirdid-1;
+        if(maxsmallerthirdid!=0){
+            ArrayList<Data> arr=new ArrayList<Data>();
+            arr=myDatabase.getarray();
+            for(int i=0;i<arr.size();i++){
+                if(arr.get(i).getFirstid()==firstid&&arr.get(i).getSecondid()==secondid){
+                    if(arr.get(i).getThirdid()==maxsmallerthirdid){
+                        arr.get(i).setThirdid(thirdid);
+                        myDatabase.toUpdate(arr.get(i));
+                    }else if(arr.get(i).getThirdid()==thirdid){
+                        arr.get(i).setThirdid(maxsmallerthirdid);
+                        myDatabase.toUpdate(arr.get(i));
+                    }
+                }
+
+            }
+        }else {
+            return;
+        }
+    }
 }

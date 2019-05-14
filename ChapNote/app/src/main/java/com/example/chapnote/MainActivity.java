@@ -86,21 +86,21 @@ public class MainActivity extends AppCompatActivity {
         layoutInflater = getLayoutInflater();
 
         myDatabase = new MyDatabase(this);
-        arrayList = myDatabase.getarray();
+        arrayList = myDatabase.getFirst();
         final MyAdapter adapter = new MyAdapter(MainActivity.this,layoutInflater,arrayList);
         adapter.notifyDataSetChanged();
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                arrayList = myDatabase.getarray();
+                arrayList = myDatabase.getFirst();
                 MyAdapter adapter = new MyAdapter(MainActivity.this,layoutInflater,arrayList);
                 listView.setAdapter(adapter);
                 Toast.makeText(MainActivity.this,"上移:"+arrayList.get(position).getFirstid(),Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(getApplicationContext(),FirstActivity.class);
-//                intent.putExtra("id",arrayList.get(position).getId());
-//                startActivity(intent);
-//                MainActivity.this.finish();
+                Intent intent = new Intent(getApplicationContext(),FirstActivity.class);
+                intent.putExtra("first",arrayList.get(position).getFirstid());
+                startActivity(intent);
+                MainActivity.this.finish();
             }
         });
 
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
                 arrayList.clear();
-                arrayList=myDatabase.getarray();
+                arrayList = myDatabase.getFirst();
                 adapter.notifyDataSetChanged();
                 new AlertDialog.Builder(MainActivity.this)
                         .setMessage("是否删除此条目？")
@@ -144,9 +144,9 @@ public class MainActivity extends AppCompatActivity {
                 int id=maxId()+1;
                 int fid=maxFirstid()+1;
                 Data a=new Data(id,fid,0,0,text,color,time,"开");
-                Toast.makeText(MainActivity.this,"颜色:"+a.getColor(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"新建了一条"+a.getColor()+"笔记",Toast.LENGTH_SHORT).show();
                 myDatabase.toInsert(a);
-                arrayList = myDatabase.getarray();
+                arrayList = myDatabase.getFirst();
                 MyAdapter adapter = new MyAdapter(MainActivity.this,layoutInflater,arrayList);
                 listView.setAdapter(adapter);
             }

@@ -34,7 +34,7 @@ public class SearchActivity extends AppCompatActivity {
     private TextView resultText;
     private MyDatabaseHelper dbHelper;//= new MyDataBaseHelper(this,"mymoney1.db",null,1);
     private SQLiteDatabase db;
-private String mcolor;
+    private String mcolor;
     private Timer timer;
     private ArrayList alforId;//存放取到的所有id
     private String sid="";

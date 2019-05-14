@@ -42,7 +42,7 @@ public class Sort extends Func {
     }
 
     public void toUp(int id,int firstid, int secondid){
-        int maxsmallersecondid=id-1;
+        int maxsmallersecondid=secondid-1;
         if(maxsmallersecondid!=0){
             ArrayList<Data> arr=new ArrayList<Data>();
             arr=myDatabase.getarray();
