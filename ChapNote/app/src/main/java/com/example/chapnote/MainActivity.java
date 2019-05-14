@@ -1,24 +1,39 @@
 package com.example.chapnote;
 
 
-import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
+import static com.example.chapnote.MyApplication.getContext;
 
 
 public class MainActivity extends AppCompatActivity {
 
+    ListView listView;
+    EditText editText;
+    Button button;
+    LayoutInflater layoutInflater;
+    ArrayList<Data> arrayList;
+    MyDatabase myDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +80,80 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        listView = (ListView)findViewById(R.id.listView);
+        button = (Button)findViewById(R.id.button);
+        layoutInflater = getLayoutInflater();
+
+        myDatabase = new MyDatabase(this);
+        arrayList = myDatabase.getarray();
+        final MyAdapter adapter = new MyAdapter(MainActivity.this,layoutInflater,arrayList);
+        adapter.notifyDataSetChanged();
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                arrayList = myDatabase.getarray();
+                MyAdapter adapter = new MyAdapter(MainActivity.this,layoutInflater,arrayList);
+                listView.setAdapter(adapter);
+                Toast.makeText(MainActivity.this,"上移:"+arrayList.get(position).getFirstid(),Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent(getApplicationContext(),FirstActivity.class);
+//                intent.putExtra("id",arrayList.get(position).getId());
+//                startActivity(intent);
+//                MainActivity.this.finish();
+            }
+        });
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                arrayList.clear();
+                arrayList=myDatabase.getarray();
+                adapter.notifyDataSetChanged();
+                new AlertDialog.Builder(MainActivity.this)
+                        .setMessage("是否删除此条目？")
+                        .setNegativeButton("取消",new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
+                        .setPositiveButton("确定",new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                myDatabase.toDelete(arrayList.get(position).getId());
+                                arrayList = myDatabase.getarray();
+                                MyAdapter adapter = new MyAdapter(MainActivity.this,layoutInflater,arrayList);
+                                listView.setAdapter(adapter);
+                            }
+                        })
+                        .create()
+                        .show();
+                    return true;
+            }
+        });
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SimpleDateFormat myFmt=new SimpleDateFormat("yyyy/MM/dd");
+                Date date = new Date(System.currentTimeMillis());
+                String time=myFmt.format(date);
+                editText=(EditText)findViewById(R.id.editText);
+                String text=editText.getText().toString();
+                String color=Color.color;
+                int id=maxId()+1;
+                int fid=maxFirstid()+1;
+                Data a=new Data(id,fid,0,0,text,color,time,"开");
+                Toast.makeText(MainActivity.this,"颜色:"+a.getColor(),Toast.LENGTH_SHORT).show();
+                myDatabase.toInsert(a);
+                arrayList = myDatabase.getarray();
+                MyAdapter adapter = new MyAdapter(MainActivity.this,layoutInflater,arrayList);
+                listView.setAdapter(adapter);
+            }
+        });
+
+
+
     }
 
     //Menu部分
@@ -99,5 +188,30 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setOverflowIcon(Color.colorPic);
         toolbar.setLogo(Color.colorPic);
     }
+
+
+    public int maxId(){
+        int MaxId=0;
+        ArrayList<Data> arr=new ArrayList<Data>();
+        arr=myDatabase.getarray();
+        for(int i=0;i<arr.size();i++){
+            if(arr.get(i).getId()>MaxId){
+                MaxId=arr.get(i).getId();
+            }
+        }
+        return MaxId;
+    }
+    public int maxFirstid(){
+        int MaxFirstid=0;
+        ArrayList<Data> arr=new ArrayList<Data>();
+        arr=myDatabase.getarray();
+        for(int i=0;i<arr.size();i++){
+            if(arr.get(i).getFirstid()>MaxFirstid){
+                MaxFirstid=arr.get(i).getFirstid();
+            }
+        }
+        return MaxFirstid;
+    }
+
 
 }

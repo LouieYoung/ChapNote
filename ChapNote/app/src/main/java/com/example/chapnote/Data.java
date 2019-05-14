@@ -1,6 +1,6 @@
 package com.example.chapnote;
 
-public class Data {
+public class Data{
     private int id;
     private int firstid;
     private int secondid;
@@ -16,6 +16,7 @@ public class Data {
         this.secondid=secondid;
         this.thirdid=thirdid;
         this.text=text;
+        this.color=color;
         this.time=time;
         this.open=open;
     }
@@ -46,5 +47,7 @@ public class Data {
     public String getOpen(){
         return open;
     }
+
+
 
 }

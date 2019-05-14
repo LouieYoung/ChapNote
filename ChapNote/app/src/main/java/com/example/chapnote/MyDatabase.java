@@ -1,26 +1,27 @@
 package com.example.chapnote;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
 
 public class MyDatabase {
     Context context;
-    MyDatabaseHelper myDatabaseHelper;
-    SQLiteDatabase mydatebase;
+    MyDatabaseHelper dbHelper;
+    SQLiteDatabase db;
     public MyDatabase(Context context){
         this.context = context;
-        myDatabaseHelper =new MyDatabaseHelper(context);
+        dbHelper =new MyDatabaseHelper(context);
     }
 
     public ArrayList<Data> getarray(){
         ArrayList<Data> arr = new ArrayList<Data>();
-        mydatebase = myDatabaseHelper.getWritableDatabase();
-        Cursor cursor = mydatebase.rawQuery("select id,firstid,secondid,thirdid,text,color,time,open from note",null);
+        dbHelper =new MyDatabaseHelper(context);
+        db= dbHelper.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select id,firstid,secondid,thirdid,text,color,time,open from note",null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
             int id = cursor.getInt(cursor.getColumnIndex("id"));
@@ -32,30 +33,31 @@ public class MyDatabase {
             String time = cursor.getString(cursor.getColumnIndex("time"));
             String open = cursor.getString(cursor.getColumnIndex("open"));
             Data data = new Data(id,firstid,secondid,thirdid,text,color,time,open);
-            mydatebase.close();
+            db.close();
             arr.add(data);
             cursor.moveToNext();
-        }
-        mydatebase.close();
+        };
+        db.close();
+        Collections.sort(arr,new DataComparator());
         return arr;
     }
 
     public void toUpdate(Data data){
-        mydatebase = myDatabaseHelper.getWritableDatabase();
-        mydatebase.execSQL(
+        db = dbHelper.getWritableDatabase();
+        db.execSQL(
                 "update note set firstid='" +data.getFirstid()+
-                        "'secondid'"+data.getSecondid()+
-                        "'thirdid'"+data.getThirdid()+
+                        "',secondid='"+data.getSecondid()+
+                        "',thirdid='"+data.getThirdid()+
                         "',text='"+data.getText()+
                         "',color='"+data.getColor()+
                         "',time='"+data.getTime()+
                         "',open='"+data.getOpen()+
                         "'where id='"+data.getId()+"'");
-        mydatebase.close();
+        db.close();
     }
     public void toInsert(Data data){
-        mydatebase = myDatabaseHelper.getWritableDatabase();
-        mydatebase.execSQL(
+        db = dbHelper.getWritableDatabase();
+        db.execSQL(
                 "insert into note(firstid,secondid,thirdid,text,color,time,open)values('"
                         +data.getFirstid()+"','"
                         +data.getSecondid()+"','"
@@ -64,12 +66,12 @@ public class MyDatabase {
                         +data.getColor()+"','"
                         +data.getTime()+"','"
                         +data.getOpen()+"')");
-                mydatebase.close();
+                db.close();
     }
     public void toDelete(int id){
-        mydatebase = myDatabaseHelper.getWritableDatabase();
-        mydatebase.execSQL("delete from note where id="+id+"");
-        mydatebase.close();
+        db = dbHelper.getWritableDatabase();
+        db.execSQL("delete from note where id="+id+"");
+        db.close();
     }
 
 }

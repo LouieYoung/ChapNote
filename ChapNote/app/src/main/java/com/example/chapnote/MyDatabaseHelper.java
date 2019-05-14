@@ -4,13 +4,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
+    private Context mContext;
     private final String CREATE_NOTE="create table note("+
             "id integer primary key autoincrement," +
             "firstid integer,"+
-            "seconid integer,"+
+            "secondid integer,"+
             "thirdid integer,"+
             "text text,"+
             "color text,"+
@@ -18,7 +18,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             "open text"+
             ")";
     public MyDatabaseHelper(Context context){
-        super(context,"mydate",null,1);
+        super(context,"myDate",null,1);
+        mContext=context;
     }
     @Override
     public void onCreate(SQLiteDatabase db){
@@ -26,8 +27,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     }
     @Override
     public void onUpgrade(SQLiteDatabase db,int oldVersion,int newVersion){
-        db.execSQL("drop table if exists note");
-        onCreate(db);
     }
 
     public long allCaseNum(SQLiteDatabase db){

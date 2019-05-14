@@ -1,24 +1,26 @@
 package com.example.chapnote;
 
-import android.support.v4.content.ContextCompat;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import static com.example.chapnote.MyApplication.getContext;
+import static com.example.chapnote.Color.getColorPicId;
 
 public class MyAdapter extends BaseAdapter {
-
+    Context mContext;
     LayoutInflater inflater;
     ArrayList<Data> array;
     MyDatabase myDatabase;
 
-    public MyAdapter(LayoutInflater inf,ArrayList<Data> arry){
+    public MyAdapter(Context context,LayoutInflater inf,ArrayList<Data> arry){
+        this.mContext=context;
         this.inflater=inf;
         this.array=arry;
     }
@@ -47,31 +49,103 @@ public class MyAdapter extends BaseAdapter {
             vh.text=(TextView) convertView.findViewById(R.id.text);
             vh.time=(TextView) convertView.findViewById(R.id.time);
             vh.color=(Button) convertView.findViewById(R.id.color);
-            vh.delete=(Button)convertView.findViewById(R.id.delete);
             vh.up=(Button)convertView.findViewById(R.id.up);
             convertView.setTag(vh);
         }
         vh=(ViewHolder) convertView.getTag();
         vh.text.setText(array.get(position).getText());
         vh.time.setText(array.get(position).getTime());
-        vh.color.setBackground(ContextCompat.getDrawable(getContext(),Color.getColorPicId(array.get(position).getColor())));
-        vh.delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myDatabase.toDelete(array.get(position).getId());
-            }
-        });
         vh.up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Sort sort=new Sort();
-                sort.toUp(array.get(position).getId());
+                toUp(array.get(position).getId());
+                array.clear();
+                array=myDatabase.getarray();
+                notifyDataSetChanged();
             }
         });
+        vh.color.setBackgroundResource(getColorPicId(array.get(position).getColor()));
+
         return convertView;
     }
     class ViewHolder{     //内部类，对控件进行缓存
         TextView text,time;
-        Button color,delete,up;
+        Button color,up;
+    }
+    public void toUp(int id){
+        ArrayList<Data> arr=new ArrayList<Data>();
+        myDatabase=new MyDatabase(mContext);
+        arr=myDatabase.getarray();
+        for(int i=0;i<arr.size();i++){
+            if(arr.get(i).getId()==id){
+                if(arr.get(i).getThirdid()!=0){
+                    toUp(arr.get(i).getId(),arr.get(i).getFirstid(),arr.get(i).getSecondid(),arr.get(i).getThirdid());
+                }else if(arr.get(i).getSecondid()!=0){
+                    toUp(arr.get(i).getId(),arr.get(i).getFirstid(),arr.get(i).getSecondid());
+                }else if(arr.get(i).getFirstid()!=0){
+                    toUp(arr.get(i).getId(),arr.get(i).getFirstid());
+                }else{
+                    return;
+                }
+            }
+        }
+        return;
+    }
+    public void toUp(int id,int firstid){
+        int maxsmallerfirstid=firstid-1;
+        if(maxsmallerfirstid!=0){
+            ArrayList<Data> arr=new ArrayList<Data>();
+            arr=myDatabase.getarray();
+            for(int i=0;i<arr.size();i++){
+                if(arr.get(i).getFirstid()==maxsmallerfirstid){
+                    arr.get(i).setFirstid(firstid);
+                    myDatabase.toUpdate(arr.get(i));
+                }else if(arr.get(i).getFirstid()==firstid){
+                    arr.get(i).setFirstid(maxsmallerfirstid);
+                    myDatabase.toUpdate(arr.get(i));
+                }
+            }
+        }else {
+            return;
+        }
+    }
+
+    public void toUp(int id,int firstid, int secondid){
+        int maxsmallersecondid=id-1;
+        if(maxsmallersecondid!=0){
+            ArrayList<Data> arr=new ArrayList<Data>();
+            arr=myDatabase.getarray();
+            for(int i=0;i<arr.size();i++){
+                if(arr.get(i).getThirdid()==maxsmallersecondid){
+                    arr.get(i).setFirstid(secondid);
+                    myDatabase.toUpdate(arr.get(i));
+                }else if(arr.get(i).getFirstid()==secondid){
+                    arr.get(i).setFirstid(maxsmallersecondid);
+                    myDatabase.toUpdate(arr.get(i));
+                }
+            }
+        }else {
+            return;
+        }
+
+    }
+    public void toUp(int id,int firstid, int secondid,int thirdid){
+        int maxsmallerthirdid=thirdid-1;
+        if(maxsmallerthirdid!=0){
+            ArrayList<Data> arr=new ArrayList<Data>();
+            arr=myDatabase.getarray();
+            for(int i=0;i<arr.size();i++){
+                if(arr.get(i).getThirdid()==maxsmallerthirdid){
+                    arr.get(i).setFirstid(thirdid);
+                    myDatabase.toUpdate(arr.get(i));
+                }else if(arr.get(i).getFirstid()==thirdid){
+                    arr.get(i).setFirstid(maxsmallerthirdid);
+                    myDatabase.toUpdate(arr.get(i));
+                }
+            }
+        }else {
+            return;
+        }
+
     }
 }

@@ -62,7 +62,9 @@ private String mcolor;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        dataIn();
+        dbHelper= new MyDatabaseHelper(SearchActivity.this);
+        db = dbHelper.getWritableDatabase();
+//        dataIn();
         //数据库初始化
 
         final Toolbar toolbar=(Toolbar)findViewById(R.id.toolBar);
@@ -240,45 +242,44 @@ private String mcolor;
         toolbar.setOverflowIcon(Color.colorPic);
     }
 
-    public void dataIn(){
-        dbHelper= new MyDatabaseHelper(SearchActivity.this,"mymo.db",null,1);
-        db = dbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
+//    public void dataIn(){
 
-        values.put("text","我在哈尔滨工业大学威海");
-        values.put("color","black");
-        values.put("id","1");
-        db.insert("note",null,values);
-        values.clear();
-
-        values.put("text","我爱哈尔滨大连");
-        values.put("color","red");
-        values.put("id","2");
-        db.insert("note",null,values);
-        values.clear();
-
-        values.put("text","戴尔android什么东西");
-        values.put("id","3");
-        values.put("color","red");
-        db.insert("note",null,values);
-        values.clear();
-
-        values.put("text","第三次的Android项目报告");
-        values.put("id","4");
-        values.put("color","yellow");
-        db.insert("note",null,values);
-        values.clear();
-
-        values.put("text","项目的第三次报告");
-        values.put("id","5");
-        values.put("color","red");
-        db.insert("note",null,values);
-        values.clear();
-
-        values.put("text","我爱中国");
-        values.put("id","6");
-        values.put("color","purple");
-        db.insert("note",null,values);
-        values.clear();
-    }
+//        ContentValues values = new ContentValues();
+//
+//        values.put("text","我在哈尔滨工业大学威海");
+//        values.put("color","black");
+//        values.put("id","1");
+//        db.insert("note",null,values);
+//        values.clear();
+//
+//        values.put("text","我爱哈尔滨大连");
+//        values.put("color","red");
+//        values.put("id","2");
+//        db.insert("note",null,values);
+//        values.clear();
+//
+//        values.put("text","戴尔android什么东西");
+//        values.put("id","3");
+//        values.put("color","red");
+//        db.insert("note",null,values);
+//        values.clear();
+//
+//        values.put("text","第三次的Android项目报告");
+//        values.put("id","4");
+//        values.put("color","yellow");
+//        db.insert("note",null,values);
+//        values.clear();
+//
+//        values.put("text","项目的第三次报告");
+//        values.put("id","5");
+//        values.put("color","red");
+//        db.insert("note",null,values);
+//        values.clear();
+//
+//        values.put("text","我爱中国");
+//        values.put("id","6");
+//        values.put("color","purple");
+//        db.insert("note",null,values);
+//        values.clear();
+//    }
 }

@@ -4,7 +4,7 @@ package com.example.chapnote;
 import java.util.ArrayList;
 
 public class Sort extends Func {
-    private MyDatabase myDatabase;
+    MyDatabase myDatabase = new MyDatabase(this);
     public void toUp(int id){
         ArrayList<Data> arr=new ArrayList<Data>();
         for(int i=0;i<arr.size();i++){
@@ -79,4 +79,5 @@ public class Sort extends Func {
         }
 
     }
+
 }
