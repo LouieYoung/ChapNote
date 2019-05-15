@@ -3,6 +3,8 @@ package com.example.chapnote;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     LayoutInflater layoutInflater;
     ArrayList<Data> arrayList;
     MyDatabase myDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

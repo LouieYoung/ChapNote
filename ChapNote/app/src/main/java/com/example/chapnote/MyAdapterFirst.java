@@ -21,11 +21,11 @@ public class MyAdapterFirst extends BaseAdapter {
     MyDatabase myDatabase;
     int first;
 
-    public MyAdapterFirst(Context context, LayoutInflater inf, ArrayList<Data> arry,int fir){
+    public MyAdapterFirst(Context context, LayoutInflater inf, ArrayList<Data> arr,int fir){
         this.first=fir;
         this.mContext=context;
         this.inflater=inf;
-        this.array=arry;
+        this.array=arr;
     }
 
     @Override
