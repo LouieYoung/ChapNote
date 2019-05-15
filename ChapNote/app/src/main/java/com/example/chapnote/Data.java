@@ -21,33 +21,64 @@ public class Data{
         this.open=open;
     }
     public void setFirstid(int firstid){
+
         this.firstid=firstid;
+
     }
-    public void setSecondid(int secondid){this.secondid=secondid;}
-    public void setThirdid(int thirdid){this.thirdid=thirdid;}
+    public void setSecondid(int secondid){
+
+        this.secondid=secondid;
+
+    }
+    public void setThirdid(int thirdid){
+
+        this.thirdid=thirdid;
+
+    }
+    public void setOpen(String open){
+
+        this.open=open;
+
+    }
     public int getId(){
+
         return id;
+
     }
     public int getFirstid(){
+
         return firstid;
+
     }
     public int getSecondid(){
+
         return secondid;
+
     }
     public int getThirdid(){
+
         return thirdid;
+
     }
     public String getText(){
+
         return text;
+
     }
     public String getColor(){
+
         return color;
+
     }
     public String getTime(){
+
         return time;
+
     }
     public String getOpen(){
+
         return open;
+
     }
 
 

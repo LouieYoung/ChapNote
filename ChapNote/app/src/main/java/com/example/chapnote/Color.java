@@ -4,7 +4,7 @@ import android.graphics.drawable.Drawable;
 
 import java.lang.reflect.Field;
 
-public class Color extends Func {
+public class Color{
     public static String color="black";
     public static Drawable colorPic;
     public static int colorId;

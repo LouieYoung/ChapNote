@@ -18,7 +18,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             "open text"+
             ")";
     public MyDatabaseHelper(Context context){
-        super(context,"myDate",null,1);
+        super(context,"Dateba",null,1);
         mContext=context;
     }
     @Override

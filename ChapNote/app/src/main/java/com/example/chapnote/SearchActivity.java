@@ -1,6 +1,6 @@
 package com.example.chapnote;
 
-import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -11,11 +11,14 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,8 +39,13 @@ public class SearchActivity extends AppCompatActivity {
     private SQLiteDatabase db;
     private String mcolor;
     private Timer timer;
-    private ArrayList alforId;//存放取到的所有id
+    private ArrayList<Integer> alforId;//存放取到的所有id
     private String sid="";
+    LayoutInflater layoutInflater;
+    MyAdapterSearch adapter;
+    ListView listView;
+    MyDatabase myDatabase;
+    ArrayList<Data> array=new ArrayList<Data>();
 
     private Handler mHandler = new Handler(){
         @Override
@@ -46,7 +54,15 @@ public class SearchActivity extends AppCompatActivity {
                 alforId = searchAll();
                 if(!alforId.isEmpty()){
                     for(int i=0;i<alforId.size();i++){
-                        sid = sid+String.valueOf(alforId.get(i))+",";
+                        array.clear();
+                        myDatabase=new MyDatabase(SearchActivity.this);
+                        for(int j=0;j<alforId.size();j++){
+                            Data a=myDatabase.getDataFromId(alforId.get(j));
+                            array.add(a);
+                        }
+                        adapter = new MyAdapterSearch(SearchActivity.this,layoutInflater,array);
+                        listView.setAdapter(adapter);
+                        sid = sid+alforId.get(i)+",";
                     }
                     idText.setText(sid);
                     sid="";
@@ -64,8 +80,12 @@ public class SearchActivity extends AppCompatActivity {
 
         dbHelper= new MyDatabaseHelper(SearchActivity.this);
         db = dbHelper.getWritableDatabase();
-//        dataIn();
-        //数据库初始化
+        //dataIn();
+        //数据库初始化测试
+        listView=(ListView)findViewById(R.id.listView);
+        layoutInflater = getLayoutInflater();
+
+
 
         final Toolbar toolbar=(Toolbar)findViewById(R.id.toolBar);
         //toolbar部分
@@ -120,8 +140,18 @@ public class SearchActivity extends AppCompatActivity {
                 message.what=0;
                 mHandler.sendMessage(message);
             }
-        },0,1000);//每隔一秒使用handler发送一下消息,也就是每隔一秒执行一次,一直重复执行
+        },0,2000);//每隔一秒使用handler发送一下消息,也就是每隔一秒执行一次,一直重复执行
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(),FirstActivity.class);
+                intent.putExtra("first",array.get(position).getFirstid());
+                intent.putExtra("color",array.get(position).getColor());
+                startActivity(intent);
+                SearchActivity.this.finish();
+            }
+        });
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

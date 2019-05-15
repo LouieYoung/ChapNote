@@ -15,12 +15,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <provider
-            android:name=".MyCP"
-            android:authorities="com.example.chapnote"
-            android:enabled="true"
-            android:exported="true">
-        </provider>
         <activity android:name=".SearchActivity"
             android:parentActivityName=".MainActivity"/>
         <activity android:name=".FirstActivity"

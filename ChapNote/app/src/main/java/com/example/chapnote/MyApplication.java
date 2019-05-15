@@ -5,10 +5,6 @@ import android.content.Context;
 
 import jackmego.com.jieba_android.JiebaSegmenter;
 
-/**
- * Created by JackMeGo on 2017/7/4.
- */
-
 public class MyApplication extends Application {
     private static Context mContext;
     @Override

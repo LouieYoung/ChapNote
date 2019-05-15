@@ -23,8 +23,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static com.example.chapnote.MyApplication.getContext;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -96,11 +94,10 @@ public class MainActivity extends AppCompatActivity {
                 arrayList = myDatabase.getFirst();
                 MyAdapter adapter = new MyAdapter(MainActivity.this,layoutInflater,arrayList);
                 listView.setAdapter(adapter);
-                Toast.makeText(MainActivity.this,"上移:"+arrayList.get(position).getFirstid(),Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(),FirstActivity.class);
                 intent.putExtra("first",arrayList.get(position).getFirstid());
+                intent.putExtra("color",arrayList.get(position).getColor());
                 startActivity(intent);
-                MainActivity.this.finish();
             }
         });
 
@@ -120,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                         .setPositiveButton("确定",new DialogInterface.OnClickListener(){
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                myDatabase.toDelete(arrayList.get(position).getId());
+                                toDeleteFirst(arrayList.get(position).getId(),arrayList.get(position).getFirstid());
                                 arrayList = myDatabase.getarray();
                                 MyAdapter adapter = new MyAdapter(MainActivity.this,layoutInflater,arrayList);
                                 listView.setAdapter(adapter);
@@ -144,16 +141,24 @@ public class MainActivity extends AppCompatActivity {
                 int id=maxId()+1;
                 int fid=maxFirstid()+1;
                 Data a=new Data(id,fid,0,0,text,color,time,"开");
-                Toast.makeText(MainActivity.this,"新建了一条"+a.getColor()+"笔记",Toast.LENGTH_SHORT).show();
                 myDatabase.toInsert(a);
                 arrayList = myDatabase.getFirst();
                 MyAdapter adapter = new MyAdapter(MainActivity.this,layoutInflater,arrayList);
                 listView.setAdapter(adapter);
             }
         });
-
-
-
+    }
+    public void toDeleteFirst(int id,int firstid){
+        ArrayList<Data> arr=new ArrayList<Data>();
+        arr=myDatabase.getarray();
+        for(int i=0;i<arr.size();i++){
+            if(arr.get(i).getFirstid()==firstid){
+                myDatabase.toDelete(arr.get(i).getId());
+            }else if(arr.get(i).getFirstid()>firstid){
+                arr.get(i).setFirstid(arr.get(i).getFirstid()-1);
+                myDatabase.toUpdate(arr.get(i));
+            }
+        }
     }
 
     //Menu部分

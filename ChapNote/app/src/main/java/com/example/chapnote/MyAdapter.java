@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -72,14 +71,13 @@ public class MyAdapter extends BaseAdapter {
         TextView text,time;
         Button color,up;
     }
-
     public void toUp(int id){
         ArrayList<Data> arr=new ArrayList<Data>();
         myDatabase=new MyDatabase(mContext);
         arr=myDatabase.getarray();
         for(int i=0;i<arr.size();i++){
             if(arr.get(i).getId()==id){
-                if(arr.get(i).getFirstid()!=0){
+                if(arr.get(i).getFirstid()>0){
                     toUp(arr.get(i).getId(),arr.get(i).getFirstid());
                 }else{
                     return;
@@ -89,10 +87,17 @@ public class MyAdapter extends BaseAdapter {
         return;
     }
     public void toUp(int id,int firstid){
-        int maxsmallerfirstid=firstid-1;
-        if(maxsmallerfirstid!=0){
-            ArrayList<Data> arr=new ArrayList<Data>();
-            arr=myDatabase.getarray();
+        ArrayList<Data> arr=new ArrayList<Data>();
+        arr=myDatabase.getarray();
+        int maxsmallerfirstid=0;
+        for(int i=0;i<arr.size();i++){
+            if(arr.get(i).getFirstid()<firstid){
+                maxsmallerfirstid=arr.get(i).getFirstid();
+            }else if(arr.get(i).getFirstid()==firstid){
+                break;
+            }
+        }
+        if(maxsmallerfirstid>0){
             for(int i=0;i<arr.size();i++){
                 if(arr.get(i).getFirstid()==maxsmallerfirstid){
                     arr.get(i).setFirstid(firstid);
@@ -106,5 +111,6 @@ public class MyAdapter extends BaseAdapter {
             return;
         }
     }
+
 
 }
