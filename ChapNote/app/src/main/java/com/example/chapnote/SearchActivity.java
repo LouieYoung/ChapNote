@@ -61,6 +61,7 @@ public class SearchActivity extends AppCompatActivity {
                             array.add(a);
                         }
                         adapter = new MyAdapterSearch(SearchActivity.this,layoutInflater,array);
+                        adapter.notifyDataSetChanged();
                         listView.setAdapter(adapter);
                         sid = sid+alforId.get(i)+",";
                     }

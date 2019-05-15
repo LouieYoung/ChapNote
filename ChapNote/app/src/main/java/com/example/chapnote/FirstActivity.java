@@ -409,6 +409,7 @@ public class FirstActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //shareMsg();
                 shareMsg(activityTitle,msgTitle,msgText,imgPath);
+                cutDialog.dismiss();
                 //Toast.makeText(MainActivity.this,"点击了share按钮",Toast.LENGTH_SHORT).show();
             }
         });
