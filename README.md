@@ -1,7 +1,7 @@
-# ChapNote 小书笔记
+﻿# ChapNote 小书笔记
 ## 简单实用、简约优雅的笔记类应用
 ### 主要界面如下：
-![test](assets/markdown-img-paste-20190521222746713.png)
+![test](过程文档/素材/图/test.png)
 ### 主要功能：
 #### 随手记事，快速检索，以图分享
 
